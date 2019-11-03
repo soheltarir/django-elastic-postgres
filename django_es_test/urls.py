@@ -14,12 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 from jobs.apis import JobElasticListView, JobDatabaseListAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/job/elastic', JobElasticListView.as_view()),
-    path('api/job/database', JobDatabaseListAPIView.as_view())
+    path('api/job/elastic/', JobElasticListView.as_view()),
+    path('api/job/database/', JobDatabaseListAPIView.as_view()),
+    path('silk/', include('silk.urls', namespace='silk')),
 ]

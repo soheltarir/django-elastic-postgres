@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'jobs',
-    'django_extensions'
+    'django_extensions',
+    'silk'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'django_es_test.urls'
@@ -122,12 +124,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = 'static'
 
 # Elasticsearch and Model Mapping
 ELASTIC_CONSTANTS = {
-    'Job': {'index': 'jobs', 'doc_type': 'job'}
+    'Job': {
+        'index': 'jobs',
+        'doc_type': 'job',
+        'pg_function': 'get_job_data'
+    }
 }
+ELASTIC_HOST = 'http://localhost:9200'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
