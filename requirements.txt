@@ -1,4 +1,4 @@
-Django==2.2.13
+Django==2.2.18
 django-extensions==2.2.5
 django-seed==0.1.9
 django-silk==3.0.4
